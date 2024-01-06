@@ -188,8 +188,8 @@ CPPFLAGS += \
 -fno-rtti \
 -Wno-register
 
-C_STANDARD = -std=gnu11
-CPP_STANDARD ?= -std=gnu++17
+C_STANDARD = -std=c11
+CPP_STANDARD ?= -std=cpp++17
 
 
 #######################################
