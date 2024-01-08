@@ -246,7 +246,7 @@ struct MidiEvent
     ChannelModeType    cm_type;
 
     /** Returns the data within the MidiEvent as a NoteOffEvent struct */
-    NoteOffEvent AsNoteOff()
+    NoteOffEvent AsNoteOff() const
     {
         NoteOffEvent m;
         m.channel  = channel;
@@ -256,7 +256,7 @@ struct MidiEvent
     }
 
     /** Returns the data within the MidiEvent as a NoteOnEvent struct */
-    NoteOnEvent AsNoteOn()
+    NoteOnEvent AsNoteOn() const
     {
         NoteOnEvent m;
         m.channel  = channel;
