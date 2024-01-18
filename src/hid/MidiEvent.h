@@ -266,7 +266,7 @@ struct MidiEvent
     }
 
     /** Returns the data within the MidiEvent as a PolyphonicKeyPressureEvent struct */
-    PolyphonicKeyPressureEvent AsPolyphonicKeyPressure()
+    PolyphonicKeyPressureEvent AsPolyphonicKeyPressure() const
     {
         PolyphonicKeyPressureEvent m;
         m.channel  = channel;
@@ -276,7 +276,7 @@ struct MidiEvent
     }
 
     /** Returns the data within the MidiEvent as a ControlChangeEvent struct.*/
-    ControlChangeEvent AsControlChange()
+    ControlChangeEvent AsControlChange() const
     {
         ControlChangeEvent m;
         m.channel        = channel;
