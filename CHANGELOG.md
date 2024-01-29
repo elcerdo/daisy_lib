@@ -1,5 +1,47 @@
 # libDaisy Changelog
 
+## Unreleased
+
+### Features
+
+* bootloader: added `System::BootloaderMode::DAISY`, `System::BootloaderMode::DAISY_SKIP_TIMEOUT`, and `System::BootloaderMode::DAISY_INFINITE_TIMEOUT` options to `System::ResetToBootloader` method for better firmware updating flexibility.
+
+### Bug fixes
+
+* bootloader: pins `D0`, `D29` and `D30` are no longer stuck when using the Daisy bootloader
+
+### Migrating
+
+#### Bootloader
+
+* This version of libDaisy and greater will be compatible with any version of the Daisy bootloader, meaning you won't have to update the bootloader on your product if you want the latest changes to libDaisy.
+* However, for newer versions of the bootloader, you must use a compatible version of libDaisy.
+  * Daisy bootloader v6.0 and up will only be compatible with libDaisy v5.3 and up.
+
+## v5.4.0
+
+### Features
+
+* adc: added ConversionSpeed configuration to the AdcChannelConfig (#579)
+* board: Updated Daisy board definitions to use new Pin system (#581)
+* board: added official support for new Daisy Seed2 DFM hardware (built in compatibility with DaisySeed class).
+* device: added driver for SK9822 (#574)
+* examples: added a number of minimal examples for the Seed/Seed2DFM
+* gatein: added new Init function that is compatible with newer C++ `Pin` type.
+
+### Bug Fixes
+
+* patchsm: Corrected gate out pin assignment confusion added by (#417) as noted by [apbianco](https://forum.electro-smith.com/u/apbianco) and [tele_player](https://forum.electro-smith.com/u/tele_player)
+* midi: improvements to UART transport stability, and fixes to parser (#566, #564, #583)
+* qspi: fixed memory cache invalidation for Persistent Storage (#572)
+* spi: fixed issue with unpredictable pin states at end of transmission (#553, #559)
+
+### Other
+
+* build: removed redundant compile-time def from CMake build (#565)
+* docs: use explicit grouping; omit comments from output (#563)
+* docs: fix typo in GPIO guide (#567)
+
 ## v5.3.0
 
 ### Features
@@ -40,7 +82,7 @@
 * bootloader: Working with the bootloader has been simplified. See [the new guide for updates on usage](https://electro-smith.github.io/libDaisy/md_doc_md__a7__getting__started__daisy__bootloader.html)
 * usb: `USBHost` class has added support for user callbacks on device connection, disconnection, and when the MSC class becomes active.
 * uart: Adds DMA RX and TX modes, similar to how they work on the I2C and SPI.
-* uart: Update function names to be more in line with the new DMA / Blocking scheme. 
+* uart: Update function names to be more in line with the new DMA / Blocking scheme.
   * The old methods are wrappers for the new ones to preserve backwards compatibility, but **will be removed in a future version**.
   * Affected functions: `PollReceive`, `PollTx`, `StartRx`, `RxActive`, `FlushRx`, `PopRx`, `Readable`
 
@@ -85,7 +127,7 @@
 * testing: debugging configuration now uses `lldb` debugging extension to support unit test debugging on macOS with Apple Silicon
 * driver: oled_ssd130x.h - Add the SpiHandle:Config struct to SSD130x4WireTransport:Config to allow full access to the SPI peripheral configuration.
 * hid: fixed issue in `AnalogControl` where computed coeff could be out of range with certain block sizes
-* driver: added missing alternate function pin mappings for SPI2, and UART for pins available on the patch_sm hardware 
+* driver: added missing alternate function pin mappings for SPI2, and UART for pins available on the patch_sm hardware
 * usb: fixed issue with MIDI output from USB
 * driver: fixed off-by-one error in qspi erase function.
 
@@ -234,7 +276,7 @@ max11300driver.ConfigurePinAsAnalogWrite(daisy::MAX11300::PIN_1, daisy::MAX11300
 
 ### Other
 
-* switch: Use `System::GetNow()` rather than the update rate to calculate `TimeHeldMs()`.  
+* switch: Use `System::GetNow()` rather than the update rate to calculate `TimeHeldMs()`.
   * This has also been applied to the `Encoder` class (since it uses `Switch` internally).
 * usb host: ST Middleware for USB Host support has been added to the Middlewares folder
 * fatfs: changed default `FS_LOCK` to 0, allowing for more simultaneously open FIL objects.
@@ -428,7 +470,7 @@ sdram.Init();
 
 ### Other
 
-* test: add unit testing for midi parser.  
+* test: add unit testing for midi parser.
 * tests: add tests for `FIFO`
 * docs: Update TODO comment in `uart.h` to reflect most recent uart update.
 * ci: add filters to the workflows
